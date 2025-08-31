@@ -1,17 +1,40 @@
-let messages = [
-    "Silly goose",
-    "Are you a wizard?",
-    "Did you know?",
-    "Cheese Monkey",
-    "Have you drank enough water?",
-    "You're a star!",
-    "They are behind you!",
+let messages1 = [
+    "Sprits fortune the sleepy,",
+    "The stars align for you,",
+    "A great opportunity is coming your way,",
+    "Embrace the unknown,",
+    "We seek the truth,",
+    "Hear the voices."
+];
+
+let messages2 = [
+  "the past is loud.",
+  "echoes of the past linger.",
+  "history has its eyes on you.",
+  "the future is unwritten.",
+  "the cats are watching.",
+  "mysteries abound."
+];
+
+let messages3 = [
+    "Silly goose!",
+    "They're behind you!",
+    "You're amazing!",
+    "If you're sure...",
+    "So it is foretold",
+    "The prophecy speaks of it",
     "Quick, run!"
 ];
 
+// Removed unused messages array
+
+
 function generateMessage() {
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    return messages[randomIndex];
+    // Randomly select one message from each array and concatenate them
+    const msg1 = messages1[Math.floor(Math.random() * messages1.length)];
+    const msg2 = messages2[Math.floor(Math.random() * messages2.length)];
+    const msg3 = messages3[Math.floor(Math.random() * messages3.length)];
+    return `${msg1} ${msg2} ${msg3}`;
 }
 
 document.getElementById("generateMessageButton").addEventListener("click", function() {
@@ -41,27 +64,29 @@ document.getElementById("generateMessageButton").addEventListener("click", funct
     document.body.appendChild(popup);
 });
 
-function addPhrase(string) {
+function addPhrase() {
     const phraseInput = document.getElementById("phraseInput");
-    const newPhrase = phraseInput.value;
+    const newPhrase = phraseInput.value.trim();
     if (newPhrase) {
-        messages.push(newPhrase);
+        // Add new phrase to messages3 by default (or choose another array as needed)
+        messages3.push(newPhrase);
         phraseInput.value = '';
+        let feedback = document.querySelector("#feedback");
+        if (feedback) {
+            feedback.textContent = "Phrase added!";
+            setTimeout(() => { feedback.textContent = ""; }, 1500);
+        }
     } else {
-        // Show feedback to the user
         let feedback = document.querySelector("#feedback");
         if (!feedback) {
             feedback = document.createElement("div");
             feedback.id = "feedback";
-           
             document.querySelector("#phraseInput").insertAdjacentElement("afterend", feedback);
         }
         feedback.textContent = "No message entered";
     }
-messages.push(newPhrase);
 }
 
-
+document.getElementById("addPhraseButton").addEventListener("click", addPhrase);
 // ...existing code...
 
-document.getElementById("addPhraseButton").addEventListener("click", addPhrase);
