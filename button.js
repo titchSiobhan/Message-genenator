@@ -38,22 +38,19 @@ function generateMessage() {
 }
 
 document.getElementById("generateMessageButton").addEventListener("click", function() {
+    // Remove any existing popup
+    const existingPopup = document.querySelector('.custom-popup');
+    if (existingPopup) {
+        document.body.removeChild(existingPopup);
+    }
+
     const popup = document.createElement("div");
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.background = "#f9effcff";
-    popup.style.padding = "20px";
-    popup.style.border = "2px solid #333";
-    popup.style.borderRadius = "8px";
-    popup.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
-    popup.style.zIndex = "1000";
+    popup.className = "custom-popup";
     popup.textContent = generateMessage();
 
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "Close";
-    closeBtn.style.marginTop = "10px";
+    closeBtn.className = "popup-close-btn";
     closeBtn.onclick = function() {
         document.body.removeChild(popup);
     };
@@ -64,7 +61,7 @@ document.getElementById("generateMessageButton").addEventListener("click", funct
     document.body.appendChild(popup);
 });
 
-function addPhrase() {
+/*function addPhrase() {
     const phraseInput = document.getElementById("phraseInput");
     const newPhrase = phraseInput.value.trim();
     if (newPhrase) {
@@ -85,8 +82,8 @@ function addPhrase() {
         }
         feedback.textContent = "No message entered";
     }
-}
+} */
 
-document.getElementById("addPhraseButton").addEventListener("click", addPhrase);
+//document.getElementById("addPhraseButton").addEventListener("click", addPhrase);
 // ...existing code...
 
